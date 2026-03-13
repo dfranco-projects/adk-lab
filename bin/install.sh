@@ -1,18 +1,43 @@
-#!bin/bash
+#!/bin/bash
 set -e
 
-declare VENV_DIR=$(pwd)/.venv
-if ! [ -d "$VENV_DIR" ]; then
-    python3 -m venv $VENV_DIR
+# Colors for output
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Determine project root and virtual environment path
+PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+VENV_DIR="$PROJECT_ROOT/.venv"
+
+echo -e "${YELLOW}Bootstrapping project environment...${NC}"
+
+# Create virtual environment if it doesn't exist
+if [ ! -d "$VENV_DIR" ]; then
+    echo "Creating virtual environment at .venv..."
+    python3 -m venv "$VENV_DIR"
 fi
 
-. $VENV_DIR/bin/activate
-pip install uv
+# Activate virtual environment
+source "$VENV_DIR/bin/activate"
 
-if ! [ -f "pyproject.toml" ]; then
+# Ensure uv is installed
+if ! command -v uv &> /dev/null; then
+    echo "Installing uv package manager..."
+    pip install -q uv
+fi
+
+cd "$PROJECT_ROOT"
+
+# Initialize project if pyproject.toml is missing
+if [ ! -f "pyproject.toml" ]; then
+    echo "Initializing new uv project..."
     uv init .
 fi
+
+# Sync dependencies
+echo "Syncing dependencies..."
 uv sync
 
-echo ""
-echo "✅ Setup complete. Your virtual environment is ready."
+echo -e "\n${GREEN}✅ Setup complete! Your environment is ready.${NC}"
+echo "To activate it, run: source .venv/bin/activate"
