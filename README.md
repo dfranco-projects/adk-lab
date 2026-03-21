@@ -10,25 +10,29 @@ Version used: 1.27.2
 
 ## Learning path
 
-This repository is structured as a progressive learning path, numbered `00` to `14`. Start at the beginning or jump to the concept you need.
+This repository is structured as a progressive learning path, numbered `00` to `16`.
+
+> **For advanced developers:** If you already know basic tool calling and state management, **skip straight to `06_multi_agent` or `09_mcp`**. The earlier folders are foundational.
 
 ```
 src/
   00_intro/                 # Basic setup, API keys, adk run/web
-  01_basic_agent/           # Simple LlmAgent, core attributes
-  02_tools/                 # Function tools, built-in tools (search, code exec)
+  01_basic_agent/           # Simple LlmAgent, core attributes, custom runner loops
+  02_tools/                 # Function tools, built-in (search, code exec), OpenAPI, BaseToolset
   03_models/                # LiteLLM, Vertex Model Garden integration
   04_structured_outputs/    # Pydantic schemas, JSON enforcement
-  05_state_session/         # InMemory vs Database session services, State dict
-  06_multi_agent/           # Coordinator + subagents, LLM-routed
-  07_workflows/             # Sequential, Parallel, and Loop agents
-  08_rag/                   # Vector stores, custom retrieval, Google RAG
-  09_mcp/                   # Local stdio/HTTP servers, remote servers
-  10_a2a/                   # Agent-to-Agent protocol communication
-  11_evaluation/            # adk eval, golden datasets, custom metrics
-  12_observability/         # OpenTelemetry tracing, debugging
-  13_deployment/            # Cloud Run, Vertex AI Agent Engine, Docker
-  14_advanced/              # Streaming, context caching, custom runner overrides
+  05_state_session/         # InMemory vs Database session services, artifacts, memory scoping
+  06_multi_agent/           # Coordinator + subagents, LLM-routed, agent-as-tool
+  07_workflows/             # Sequential, Parallel, and Loop workflow agents
+  08_rag/                   # Vector stores, custom retrieval pipelines, Google RAG tool
+  09_mcp/                   # Local stdio/HTTP servers, remote servers, dynamic integration
+  10_a2a/                   # Agent-to-Agent protocol, cross-framework communication
+  11_evaluation/            # adk eval, golden datasets, custom metrics, CI pipelines
+  12_observability/         # OpenTelemetry tracing, run inspection, debugging
+  13_deployment/            # Local runner, Cloud Run, Vertex AI Agent Engine, Docker
+  14_advanced/              # SSE streaming, audio/video pipelines, context caching, optimize
+  15_yaml_agents/           # Config-first workflows, visual agent builder imports
+  16_graph_workflows/       # ADK 2.0 alpha graph-based workflows
 ```
 
 Each folder:
@@ -41,13 +45,10 @@ Each folder:
 ## Requirements
 
 - Python 3.11+
-- `uv` (recommended) or `pip`
 - API key (Gemini or other via LiteLLM)
-
-Optional:
-- Docker
-- Node.js (for MCP servers)
-- GCP account (for deployment / tracing)
+- Docker (for deployment / isolated execution examples)
+- Node.js (for local MCP servers)
+- GCP account (for deployment / Vertex AI tracing)
 
 ---
 
@@ -59,7 +60,7 @@ cd adk-lab
 make install
 
 cp .env.example .env
-# set API keys if needed
+# set your API keys
 ```
 
 Run any example:
