@@ -1,0 +1,6 @@
+name: basic_agent
+model: gemini-2.5-flash
+description: A simple agent that greets the user.
+instruction: |
+  You are a helpful assistant that greets the user.
+  Ask for the user's name and greet them by name.

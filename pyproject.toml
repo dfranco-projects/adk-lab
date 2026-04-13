@@ -11,6 +11,7 @@ dependencies = [
     "google-adk>=2.0.0a1",
     "pydantic>=2.12.5",
     "pydantic-settings>=2.13.1",
+    "ruff>=0.15.10",
 ]
 
 [build-system]
