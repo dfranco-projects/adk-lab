@@ -35,7 +35,7 @@ This uses the standard `Agent` class in `agent.py`. By placing `from .agent impo
 ADK also supports a no-code "Agent Config" approach. By simply placing a `root_agent.yaml` in a directory, ADK parses it and dynamically creates an agent under the hood.
 
 > **Limitations of YAML Agents:**
-> While incredibly clean for simple agents, the YAML feature is experimental and currently has limitations:
+> While its more clean for simple agents, the YAML feature is experimental and currently has limitations:
 > - **Models**: Currently only supports Gemini models (third-party integration is in progress).
 > - **Agent Types**: Advanced routing agents like `LangGraphAgent` and `A2aAgent` are not supported.
 > - **Tools**: Certain complex tools (like `LongRunningFunctionTool`, `VertexAiSearchTool`, or `McpToolset`) have limited or no support via YAML config yet.
@@ -49,7 +49,9 @@ Run the web server from the project root pointing at the master directory:
 ```bash
 adk web src/agent_01_basic
 ```
-Since `agent_01_basic` contains two sub-directories (`basic_agent_python` and `basic_agent_yaml`), the ADK web UI will perfectly detect both of them! Open your browser to `http://localhost:8080` to interact with them side-by-side.
+Since `agent_01_basic` contains two sub-directories (`basic_agent_python` and `basic_agent_yaml`), the ADK web UI will detect both of them. Open your browser to `http://localhost:8080` to interact with them side-by-side.
+
+Press `CTRL+C` to quit.
 
 ### `adk run` (Terminal REPL)
 If you just want a fast, text-based interactive chat right inside your terminal, point directly at the sub-agent you want to run:
